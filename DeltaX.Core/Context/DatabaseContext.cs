@@ -7,10 +7,10 @@ using System.Text;
 
 namespace DeltaX.Core.Context
 {
-    class DatabaseContext : IdentityDbContext<User>
+    public class DatabaseContext : IdentityDbContext<User>
     {
         public DatabaseContext(DbContextOptions<DatabaseContext> options)
-            :base(options)
+            : base(options)
         {
 
         }
@@ -24,6 +24,6 @@ namespace DeltaX.Core.Context
         public DbSet<Actor> Actors { get; set; }
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Producer> Producers { get; set; }
-        
+
     }
 }
