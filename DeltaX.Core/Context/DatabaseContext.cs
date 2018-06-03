@@ -14,16 +14,23 @@ namespace DeltaX.Core.Context
         {
 
         }
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            base.OnModelCreating(builder);
-            // Customize the ASP.NET Identity model and override the defaults if needed.
-            // For example, you can rename the ASP.NET Identity table names and more.
-            // Add your customizations after calling base.OnModelCreating(builder);
-        }
         public DbSet<Actor> Actors { get; set; }
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Producer> Producers { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder mb)
+        {
+            base.OnModelCreating(mb);
+            mb.Entity<Actor>().ToTable("Actors");
+            mb.Entity<Movie>().ToTable("Movies");
+            mb.Entity<Producer>().ToTable("Producers");
+            mb.Entity<Actor>().HasKey(ac => ac.Id);
+            mb.Entity<Movie>().HasKey(ac => ac.Id);
+            mb.Entity<Producer>().HasKey(ac => ac.Id);
+            //mb.Entity<Actor>().HasOne(a => a.Movie).WithMany().HasForeignKey(a => a.MovieId);
+            //mb.Entity<Movie>().HasOne(a => a.Actors).WithMany().HasForeignKey(a => a.ActorId);
+            //mb.Entity<Movie>().HasOne(a => a.Producers).WithMany(a => a.Movies);
+
+        }
     }
 }

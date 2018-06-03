@@ -7,6 +7,8 @@ namespace DeltaX.Core.Model
     public class Movie
     {
         public int Id { get; set; }
+        public int ActorId { get; set; }
+        public int ProducerId { get; set; }
         public string Name { get; set; }
         public string YearOfRelease { get; set; }
         public string Plot { get; set; }
