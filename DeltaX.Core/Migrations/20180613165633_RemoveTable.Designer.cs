@@ -8,90 +8,14 @@ using DeltaX.Core.Context;
 namespace DeltaX.Core.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20180613165633_RemoveTable")]
+    partial class RemoveTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("DeltaX.Core.Model.Actor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Bio");
-
-                    b.Property<string>("DOB");
-
-                    b.Property<int>("MovieId");
-
-                    b.Property<string>("Name");
-
-                    b.Property<string>("Sex");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Actors");
-                });
-
-            modelBuilder.Entity("DeltaX.Core.Model.Movie", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("ActorId");
-
-                    b.Property<string>("Image");
-
-                    b.Property<string>("Name");
-
-                    b.Property<string>("Plot");
-
-                    b.Property<int>("ProducerId");
-
-                    b.Property<string>("YearOfRelease");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProducerId");
-
-                    b.ToTable("Movies");
-                });
-
-            modelBuilder.Entity("DeltaX.Core.Model.MoviesActors", b =>
-                {
-                    b.Property<int>("ActorId");
-
-                    b.Property<int>("MovieId");
-
-                    b.HasKey("ActorId", "MovieId");
-
-                    b.HasIndex("MovieId");
-
-                    b.ToTable("MoviesActors");
-                });
-
-            modelBuilder.Entity("DeltaX.Core.Model.Producer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Bio");
-
-                    b.Property<string>("DOB");
-
-                    b.Property<int>("MovieId");
-
-                    b.Property<string>("Name");
-
-                    b.Property<string>("Sex");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Producers");
-                });
 
             modelBuilder.Entity("DeltaX.Core.Model.User", b =>
                 {
@@ -252,27 +176,6 @@ namespace DeltaX.Core.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("DeltaX.Core.Model.Movie", b =>
-                {
-                    b.HasOne("DeltaX.Core.Model.Producer", "Producers")
-                        .WithMany("Movies")
-                        .HasForeignKey("ProducerId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("DeltaX.Core.Model.MoviesActors", b =>
-                {
-                    b.HasOne("DeltaX.Core.Model.Actor", "Actors")
-                        .WithMany("MoviesActors")
-                        .HasForeignKey("ActorId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("DeltaX.Core.Model.Movie", "Movies")
-                        .WithMany("MoviesActors")
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>

@@ -27,9 +27,10 @@ namespace DeltaX.Core.Context
             mb.Entity<Actor>().HasKey(ac => ac.Id);
             mb.Entity<Movie>().HasKey(ac => ac.Id);
             mb.Entity<Producer>().HasKey(ac => ac.Id);
-            mb.Entity<Actor>().HasMany(a => a.Movie).WithOne().HasForeignKey(a => a.ActorId);
-            //mb.Entity<Movie>().HasMany(a => a.Actors).WithOne().HasForeignKey(a => a.MovieId).OnDelete(Microsoft.EntityFrameworkCore.Metadata.DeleteBehavior.Restrict);
-            mb.Entity<Movie>().HasOne(a => a.Producers).WithMany(a => a.Movies);
+            mb.Entity<Movie>().HasOne(a => a.Producers).WithMany(a => a.Movies).IsRequired();
+            mb.Entity<MoviesActors>().HasKey(a => new { a.ActorId, a.MovieId });
+            mb.Entity<MoviesActors>().HasOne(a => a.Movies).WithMany(a => a.MoviesActors).HasForeignKey(a => a.MovieId);
+            mb.Entity<MoviesActors>().HasOne(a => a.Actors).WithMany(a => a.MoviesActors).HasForeignKey(a => a.ActorId);
 
         }
     }

@@ -13,7 +13,7 @@ namespace DeltaX.Core.Model
         public string YearOfRelease { get; set; }
         public string Plot { get; set; }
         public string Image { get; set; }
-        //public virtual ICollection<Actor> Actors { get; set; }
+        public virtual ICollection<MoviesActors> MoviesActors { get; set; }
         public virtual  Producer Producers { get; set; }
     }
 }
